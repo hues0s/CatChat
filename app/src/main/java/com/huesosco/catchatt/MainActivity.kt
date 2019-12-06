@@ -6,15 +6,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.huesosco.catchat.recycler.RecyclerAdapter
 import com.huesosco.catchat.recycler.RecyclerItemData
 import com.huesosco.catchatt.dialogs.AddDialog
+import com.huesosco.catchatt.recycler.SwipeToDeleteCallback
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    companion object{
+        var mainList = ArrayList<RecyclerItemData>()
+        var addPersonList = ArrayList<RecyclerItemData>()
+    }
+
+    private lateinit var adapter: RecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,30 +31,37 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener {
-            AddDialog().show(supportFragmentManager, "add dialog")
-        }
+        fullMainList()
+        fullAddList()
 
         setUpRecyclerView()
 
+        fab.setOnClickListener {
+            AddDialog(addPersonList, adapter).show(supportFragmentManager, "add dialog")
+        }
+
     }
 
-    private fun getList(): ArrayList<RecyclerItemData> {
+    private fun fullMainList() {
 
-        val list = ArrayList<RecyclerItemData>()
+        mainList.add(RecyclerItemData("happy", "Person 1"))
+        mainList.add(RecyclerItemData("happy", "Person 2"))
+        mainList.add(RecyclerItemData("sad", "Person 3"))
+        mainList.add(RecyclerItemData("happy", "Person 4"))
+        mainList.add(RecyclerItemData("sad", "Person 5"))
+        mainList.add(RecyclerItemData("sad", "Person 6"))
+        mainList.add(RecyclerItemData("happy", "Person 7"))
+        mainList.add(RecyclerItemData("sad", "Person 8"))
+        mainList.add(RecyclerItemData("happy", "Person 9"))
+        mainList.add(RecyclerItemData("sad", "Person 10"))
 
-        list.add(RecyclerItemData("happy", "Person 1"))
-        list.add(RecyclerItemData("happy", "Person 2"))
-        list.add(RecyclerItemData("sad", "Person 3"))
-        list.add(RecyclerItemData("happy", "Person 4"))
-        list.add(RecyclerItemData("sad", "Person 5"))
-        list.add(RecyclerItemData("sad", "Person 6"))
-        list.add(RecyclerItemData("happy", "Person 7"))
-        list.add(RecyclerItemData("sad", "Person 8"))
-        list.add(RecyclerItemData("happy", "Person 9"))
-        list.add(RecyclerItemData("sad", "Person 10"))
+    }
 
-        return list
+    private fun fullAddList() {
+
+        addPersonList.add(RecyclerItemData("sad", "Person 15"))
+        addPersonList.add(RecyclerItemData("happy", "Person 18"))
+
     }
 
 
@@ -56,7 +72,10 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.setItemViewCacheSize(15)
 
-        val adapter = RecyclerAdapter(applicationContext, getList())
+        adapter = RecyclerAdapter(applicationContext, mainList, "MAIN", null)
+
+        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
 
         recyclerView.adapter = adapter
     }

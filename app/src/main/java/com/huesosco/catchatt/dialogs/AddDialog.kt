@@ -6,14 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.huesosco.catchat.recycler.RecyclerAdapter
 import com.huesosco.catchat.recycler.RecyclerItemData
 import com.huesosco.catchatt.R
+import com.huesosco.catchatt.recycler.SwipeToDeleteCallback
 
 
-class AddDialog: DialogFragment() {
+class AddDialog(private val addList: ArrayList<RecyclerItemData>, private val mainAdapter: RecyclerAdapter): DialogFragment() {
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -26,16 +29,6 @@ class AddDialog: DialogFragment() {
         return dialogView
     }
 
-    private fun getList(): ArrayList<RecyclerItemData> {
-
-        val list = ArrayList<RecyclerItemData>()
-
-        list.add(RecyclerItemData("sad", "Person 15"))
-        list.add(RecyclerItemData("happy", "Person 18"))
-
-        return list
-    }
-
 
     private fun setUpRecyclerView(v: View){
 
@@ -44,10 +37,14 @@ class AddDialog: DialogFragment() {
         recyclerView.layoutManager = LinearLayoutManager(v.context)
         recyclerView.setItemViewCacheSize(15)
 
-        val adapter = RecyclerAdapter(v.context, getList())
+        val adapter = RecyclerAdapter(v.context, addList, "ADD", mainAdapter)
+
+        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter))
+        itemTouchHelper.attachToRecyclerView(recyclerView)
 
         recyclerView.adapter = adapter
     }
+
 
     private fun setUpButton(v: View){
 

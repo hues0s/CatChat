@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">@color/colorBackground</color>
-    <color name="colorAccent">#9A6EFA</color>
+    <color name="colorAccent">#AD8DF5</color>
 
-    <color name="colorBackground">#FFC2FB</color>
-    <color name="letterColor">#212121</color>
-    <color name="recyclerItemColor">#FFDAF8</color>
+    <color name="colorBackground">#942747</color>
+    <color name="letterColor">#fff</color>
+    <color name="recyclerItemColor">#9C5A6B</color>
 
 </resources>
 
@@ -58,5 +58,18 @@ DARK_1
     <color name="colorBackground">#212121</color>
     <color name="letterColor">#fff</color>
     <color name="recyclerItemColor">#3D3D3D</color>
+
+-->
+
+<!--
+
+DARK_PINK_1
+
+<color name="colorPrimary">@color/colorBackground</color>
+    <color name="colorAccent">#AD8DF5</color>
+
+    <color name="colorBackground">#942747</color>
+    <color name="letterColor">#fff</color>
+    <color name="recyclerItemColor">#9C5A6B</color>
 
 -->

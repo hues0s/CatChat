@@ -9,14 +9,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.huesosco.catchatt.MainActivity
 import com.huesosco.catchatt.R
 
 
-class RecyclerAdapter(c: Context, l : ArrayList<RecyclerItemData>): RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+class RecyclerAdapter(c: Context, l : ArrayList<RecyclerItemData>,
+                      private val adapterType: String, private val otherAdapter: RecyclerAdapter?):
+    RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     private val context: Context = c
     private val list = l
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(context).inflate(R.layout.recycler_item, parent, false)
@@ -37,7 +39,23 @@ class RecyclerAdapter(c: Context, l : ArrayList<RecyclerItemData>): RecyclerView
         holder.name.text = list[position].name
 
         holder.cardView.setOnClickListener {
-            Toast.makeText(context, "${list[position].name} clicked", Toast.LENGTH_SHORT).show()
+            //to be added...
+        }
+
+    }
+
+    fun deleteItem(position: Int){
+
+        when(adapterType){
+            "MAIN" -> {
+                MainActivity.addPersonList.add(MainActivity.mainList.removeAt(position))
+                notifyItemRemoved(position)
+            }
+            "ADD" -> {
+                MainActivity.mainList.add(MainActivity.addPersonList.removeAt(position))
+                notifyItemRemoved(position)
+                otherAdapter?.notifyItemInserted(MainActivity.mainList.size - 1)
+            }
         }
 
     }
