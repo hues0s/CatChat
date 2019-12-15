@@ -1,29 +1,25 @@
 package com.huesosco.catchatt
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.Toast
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.huesosco.catchat.recycler.RecyclerAdapter
+import com.huesosco.catchatt.recycler.RecyclerAdapterMain
 import com.huesosco.catchat.recycler.RecyclerItemData
 import com.huesosco.catchatt.dialogs.AddDialog
-import com.huesosco.catchatt.recycler.SwipeToDeleteCallback
+import com.huesosco.catchatt.recycler.RecyclerAdapterAdd
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    companion object{
-        var mainList = ArrayList<RecyclerItemData>()
-        var addPersonList = ArrayList<RecyclerItemData>()
-    }
+    private var mainList = ArrayList<RecyclerItemData>()
+    private var addPersonList = ArrayList<RecyclerItemData>()
+    private var checkedItemList = ArrayList<Boolean>()
 
-    private lateinit var adapter: RecyclerAdapter
+    private lateinit var adapter: RecyclerAdapterMain
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +29,13 @@ class MainActivity : AppCompatActivity() {
 
         fullMainList()
         fullAddList()
+        for(i in 0 until addPersonList.size) checkedItemList.add(false)
 
         setUpRecyclerView()
+        val addDialog = AddDialog(addPersonList, checkedItemList, adapter)
 
         fab.setOnClickListener {
-            AddDialog(addPersonList, adapter).show(supportFragmentManager, "add dialog")
+            addDialog.show(supportFragmentManager, "add dialog")
         }
 
     }
@@ -72,10 +70,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.setItemViewCacheSize(15)
 
-        adapter = RecyclerAdapter(applicationContext, mainList, "MAIN", null)
-
-        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter))
-        itemTouchHelper.attachToRecyclerView(recyclerView)
+        adapter = RecyclerAdapterMain(applicationContext, mainList, addPersonList, checkedItemList)
 
         recyclerView.adapter = adapter
     }

@@ -8,9 +8,9 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        >
+        android:layout_height="wrap_content">
+        <!--android:theme="@style/AppTheme.AppBarOverlay"-->
+
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -29,8 +29,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="30dp"
-
         app:srcCompat="@drawable/ic_add"
+
+        android:backgroundTint="@color/addButtonColor"
         />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

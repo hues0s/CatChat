@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">@color/colorBackground</color>
-    <color name="colorAccent">#AD8DF5</color>
+    <color name="colorAccent">#D14D7E</color>
 
-    <color name="colorBackground">#942747</color>
-    <color name="letterColor">#fff</color>
-    <color name="recyclerItemColor">#9C5A6B</color>
+    <color name="colorBackground">#FFD8E4</color>
+    <color name="letterColor">#212121</color>
+    <color name="recyclerItemColor">#FCEDF1</color>
+
+    <color name="addButtonColor">#AD8DF5</color>
 
 </resources>
 

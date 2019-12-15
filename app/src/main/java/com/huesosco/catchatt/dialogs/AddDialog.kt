@@ -6,50 +6,55 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.huesosco.catchat.recycler.RecyclerAdapter
+import com.huesosco.catchatt.recycler.RecyclerAdapterMain
 import com.huesosco.catchat.recycler.RecyclerItemData
+import com.huesosco.catchatt.MainActivity
 import com.huesosco.catchatt.R
-import com.huesosco.catchatt.recycler.SwipeToDeleteCallback
+import com.huesosco.catchatt.recycler.RecyclerAdapterAdd
 
 
-class AddDialog(private val addList: ArrayList<RecyclerItemData>, private val mainAdapter: RecyclerAdapter): DialogFragment() {
-
+class AddDialog(private val addList: ArrayList<RecyclerItemData>,
+                private val checkedItemList: ArrayList<Boolean>,
+                private val mainAdapter: RecyclerAdapterMain): DialogFragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val dialogView = inflater.inflate(R.layout.dialog_add, container, false)
 
-        setUpButton(dialogView)
-        setUpRecyclerView(dialogView)
+        val adapterAdd = RecyclerAdapterAdd(dialogView.context, addList, checkedItemList, mainAdapter)
+
+        setUpRecyclerView(dialogView, adapterAdd)
+        setUpButton(dialogView, adapterAdd)
 
         return dialogView
     }
 
 
-    private fun setUpRecyclerView(v: View){
+    private fun setUpRecyclerView(v: View, adapterAdd: RecyclerAdapterAdd){
 
         val recyclerView = v.findViewById<RecyclerView>(R.id.dialog_add_recycler_view)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(v.context)
         recyclerView.setItemViewCacheSize(15)
 
-        val adapter = RecyclerAdapter(v.context, addList, "ADD", mainAdapter)
-
-        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter))
-        itemTouchHelper.attachToRecyclerView(recyclerView)
-
-        recyclerView.adapter = adapter
+        recyclerView.adapter = adapterAdd
     }
 
 
-    private fun setUpButton(v: View){
+    private fun setUpButton(v: View, adapterAdd: RecyclerAdapterAdd){
 
         val okButton = v.findViewById<Button>(R.id.dialog_add_ok_button)
         okButton.setOnClickListener {
+
+            var i = 0
+            while(i < checkedItemList.size){
+                if(checkedItemList[i]) adapterAdd.deleteObj(i)
+                else ++i
+            }
+
             dismiss()
         }
 
