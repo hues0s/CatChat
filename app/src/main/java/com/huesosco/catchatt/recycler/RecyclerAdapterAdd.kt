@@ -40,6 +40,8 @@ class RecyclerAdapterAdd(c: Context, l : ArrayList<RecyclerItemData>, cil: Array
         holder.image.setImageResource(imageResource)
         holder.name.text = list[position].name
 
+        if (checkedItemList[position]) holder.tickImage.visibility = View.VISIBLE
+
         holder.cardView.setOnClickListener {
             if(!checkedItemList[position]) {
                 holder.tickImage.visibility = View.VISIBLE
@@ -53,12 +55,14 @@ class RecyclerAdapterAdd(c: Context, l : ArrayList<RecyclerItemData>, cil: Array
 
     }
 
-    fun deleteObj(position: Int){
-        mainAdapter.list.add(list[position])
+    fun addObj(position: Int){
+        if(!mainAdapter.list.contains(list[position])) mainAdapter.list.add(list[position])
         mainAdapter.notifyDataSetChanged()
-        checkedItemList.removeAt(position)
-        this.list.removeAt(position)
-        notifyDataSetChanged()
+    }
+
+    fun removeObj(position: Int){
+        if(mainAdapter.list.contains(list[position])) mainAdapter.list.remove(list[position])
+        mainAdapter.notifyDataSetChanged()
     }
 
 

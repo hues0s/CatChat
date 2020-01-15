@@ -39,12 +39,6 @@ class RecyclerAdapterMain(c: Context, l : ArrayList<RecyclerItemData>,
         holder.image.setImageResource(imageResource)
         holder.name.text = list[position].name
 
-        holder.deleteButton.setOnClickListener {
-            addPersonList.add(list[position])
-            checkedItemList.add(false)
-            this.list.removeAt(position)
-            notifyDataSetChanged()
-        }
 
         holder.cardView.setOnClickListener {
             //to be added...
@@ -58,7 +52,6 @@ class RecyclerAdapterMain(c: Context, l : ArrayList<RecyclerItemData>,
         val cardView: CardView = view.findViewById(R.id.recycler_item_cardview)
         val image: ImageView = view.findViewById(R.id.recycler_item_image)
         val name: TextView = view.findViewById(R.id.recycler_item_name)
-        val deleteButton: Button = view.findViewById(R.id.recycler_item_button_delete)
 
     }
 

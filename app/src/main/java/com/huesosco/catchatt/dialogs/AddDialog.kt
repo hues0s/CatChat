@@ -51,8 +51,9 @@ class AddDialog(private val addList: ArrayList<RecyclerItemData>,
 
             var i = 0
             while(i < checkedItemList.size){
-                if(checkedItemList[i]) adapterAdd.deleteObj(i)
-                else ++i
+                if(checkedItemList[i]) adapterAdd.addObj(i)
+                else adapterAdd.removeObj(i)
+                ++i
             }
 
             dismiss()

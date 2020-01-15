@@ -48,19 +48,6 @@
             android:text="Person 1"
             />
 
-        <Button
-            android:id="@+id/recycler_item_button_delete"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="20dp"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:background="@drawable/ic_delete"
-            />
-
 
 
 

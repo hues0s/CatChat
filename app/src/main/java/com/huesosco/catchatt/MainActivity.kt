@@ -42,21 +42,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun fullMainList() {
 
-        mainList.add(RecyclerItemData("happy", "Person 1"))
-        mainList.add(RecyclerItemData("happy", "Person 2"))
-        mainList.add(RecyclerItemData("sad", "Person 3"))
-        mainList.add(RecyclerItemData("happy", "Person 4"))
-        mainList.add(RecyclerItemData("sad", "Person 5"))
-        mainList.add(RecyclerItemData("sad", "Person 6"))
-        mainList.add(RecyclerItemData("happy", "Person 7"))
-        mainList.add(RecyclerItemData("sad", "Person 8"))
-        mainList.add(RecyclerItemData("happy", "Person 9"))
-        mainList.add(RecyclerItemData("sad", "Person 10"))
-
     }
 
     private fun fullAddList() {
 
+        addPersonList.add(RecyclerItemData("happy", "Person 1"))
+        addPersonList.add(RecyclerItemData("happy", "Person 2"))
+        addPersonList.add(RecyclerItemData("sad", "Person 3"))
+        addPersonList.add(RecyclerItemData("happy", "Person 4"))
+        addPersonList.add(RecyclerItemData("sad", "Person 5"))
+        addPersonList.add(RecyclerItemData("sad", "Person 6"))
+        addPersonList.add(RecyclerItemData("happy", "Person 7"))
+        addPersonList.add(RecyclerItemData("sad", "Person 8"))
+        addPersonList.add(RecyclerItemData("happy", "Person 9"))
+        addPersonList.add(RecyclerItemData("sad", "Person 10"))
         addPersonList.add(RecyclerItemData("sad", "Person 15"))
         addPersonList.add(RecyclerItemData("happy", "Person 18"))
 
